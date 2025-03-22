@@ -4,6 +4,7 @@ import Dashboard from "./dashboard";
 import Alerts from "./alerts";
 import Settings from "./settings";
 import Nav from '../../components/OrgMenu'
+import Threshold from '../Org/threashold'
 
 const Org = () => {
   return (
@@ -29,6 +30,7 @@ const Org = () => {
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Alerts" element={<Alerts />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/threshold" element={<Threshold />} />
 
         </Routes>
       </div>
