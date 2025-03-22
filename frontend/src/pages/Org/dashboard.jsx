@@ -2,12 +2,19 @@ import React, { useEffect, useState } from "react";
 import LiveData from "../../components/DataDisplay";
 import Peakemit from "../../components/Peakemit";
 import { supabase } from "../../components/supabaseClient"; 
+import aiLogo from "../../components/ai_logo.jpg";
+
 
 const Dashboard = () => {
   const [ppm, setPPM] = useState(null);
   const [previousPPM, setPreviousPPM] = useState(null);
   const [ppmRate, setPPMRate] = useState(0);
   const [dailyCO2, setDailyCO2] = useState(0);
+
+
+  const [isOpen, setIsOpen] = useState(false);
+
+
 
   const CO2_THRESHOLD_PPM = 5000;  // Live threshold for PPM
   const CO2_THRESHOLD_KG = 100;    // Daily CO₂ emission limit (kg)
@@ -134,6 +141,46 @@ const Dashboard = () => {
           <p className="text-lg">Total Daily CO₂: {dailyCO2.toFixed(2)} kg</p>
         </div>
       </div>
+
+
+
+<div>
+      {/* Chatbot Toggle Button (Fixed at Bottom Right) */}
+      <button
+        onClick={() => setIsOpen(true)}
+        className="fixed bottom-6 right-6 bg-white text-white p-3 hover:shadow-2xl rounded-full shadow-lg border hover:translate-y-[-10px]  transition"
+      >
+        <img className="w-10" src={aiLogo} />
+      </button>
+
+      {/* Chatbot Modal */}
+      {isOpen && (
+        <div className="fixed bottom-6 right-6 w-1/3  bg-white shadow-xl rounded-lg border border-gray-300">
+          {/* Modal Header */}
+          <div className="flex justify-between items-center bg-blue-600 text-white px-4 py-2 rounded-t-lg">
+            <span className="text-lg">Chatbot</span>
+            <button onClick={() => setIsOpen(false)} className="text-lg text-white bg-blue-500 rounded-lg hover:bg-blue-700 cursor-pointer hover:ring-blue-400 hover:ring-2 border-blue-600 border p-1">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+
+            </button>
+          </div>
+
+          {/* Chatbot Iframe */}
+          <iframe
+            src="https://b849a2c5fb47b78a22.gradio.live/"
+            width="100%"
+            height="500px"
+            className="border-none"
+            style={{ borderRadius: "0 0 10px 10px" }}
+          ></iframe>
+        </div>
+      )}
+    </div>
+
+
+
     </div>
   );
 };

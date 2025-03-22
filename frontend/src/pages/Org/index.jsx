@@ -6,6 +6,7 @@ import Settings from "./settings";
 import Nav from '../../components/OrgMenu'
 import Threshold from '../Org/threashold'
 import Prediction from "./prediction";
+import AiRecomendation from './AiRecomendation'
 
 const Org = () => {
   return (
@@ -33,6 +34,9 @@ const Org = () => {
           <Route path="/Settings" element={<Settings />} />
           <Route path="/threshold" element={<Threshold />} />
           <Route path="/Prediction" element={<Prediction />} />
+          <Route path="/AiRecomendation" element={<AiRecomendation />} />
+
+          
 
         </Routes>
       </div>

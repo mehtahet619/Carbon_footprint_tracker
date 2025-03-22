@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import aiLogo from "../components/ai_logo.jpg";
 
 // Function to get cookie value by name
 const getCookie = (name) => {
@@ -30,28 +31,34 @@ const Sidebar = () => {
         {/* Navigation Links */}
         <ul className="space-y-4">
           <li>
-            <Link to="/org/Dashboard" className="flex items-center text-gray-700 hover:bg-gray-100 active:bg-gray-200 p-3 rounded-lg">
+            <Link to="/org/Dashboard" className="flex items-center text-gray-700 hover:bg-gray-100 active:bg-gray-200 p-3 rounded-lg hover:translate-y-[-5px]  transition">
               Dashboard
             </Link>
           </li>
           <li>
-            <Link to="/org/settings" className="flex items-center text-gray-700 hover:bg-gray-100 active:bg-gray-200 p-3 rounded-lg">
+            <Link to="/org/settings" className="flex items-center text-gray-700 hover:bg-gray-100 active:bg-gray-200 p-3 rounded-lg hover:translate-y-[-5px]  transition">
               Setting
             </Link>
           </li>
           <li>
-            <Link to="/org/Alerts" className="flex items-center text-gray-700 hover:bg-gray-100 active:bg-gray-200 p-3 rounded-lg">
+            <Link to="/org/Alerts" className="flex items-center text-gray-700 hover:bg-gray-100 active:bg-gray-200 p-3 rounded-lg hover:translate-y-[-5px]  transition">
               Alerts
             </Link>
           </li>
           <li>
-            <Link to="/org/Prediction" className="flex items-center text-gray-700 hover:bg-gray-100 active:bg-gray-200 p-3 rounded-lg">
+            <Link to="/org/Prediction" className="flex items-center text-gray-700 hover:bg-gray-100 active:bg-gray-200 p-3 rounded-lg hover:translate-y-[-5px]  transition">
               Prediction
             </Link>
           </li>
           <li>
-            <Link to="/org/Threshold" className="flex items-center text-gray-700 hover:bg-gray-100 active:bg-gray-200 p-3 rounded-lg">
+            <Link to="/org/Threshold" className="flex items-center text-gray-700 hover:bg-gray-100 active:bg-gray-200 p-3 rounded-lg hover:translate-y-[-5px]  transition">
               Threshold
+            </Link>
+          </li>
+
+          <li>
+            <Link to="/org/AiRecomendation" className="flex items-center text-gray-700 hover:bg-gray-100 active:bg-gray-200 p-3 rounded-lg hover:translate-y-[-5px]  transition">
+              <img className="w-10" src={aiLogo} /> Recomendation
             </Link>
           </li>
         </ul>
