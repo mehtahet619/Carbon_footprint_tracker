@@ -3,6 +3,7 @@ import { supabase } from "./supabaseClient";
 
 const Peakemit = () => {
   const [peakValue, setPeakValue] = useState(null);
+  const [LowValue,setLowValue] = useState(null);
 
   useEffect(() => {
     let interval;
@@ -22,6 +23,9 @@ const Peakemit = () => {
           // Extract maximum CO₂ PPM value from the latest 60 records
           const maxValue = Math.max(...ppm_data.map((record) => Number(record.co2_ppm)));
           setPeakValue(maxValue);
+
+          const ppmValues = ppm_data.map((record) => Number(record.co2_ppm));
+          setLowValue(Math.min(...ppmValues));
         }
       } catch (error) {
         console.error("Fetching Error:", error.message);
@@ -35,13 +39,30 @@ const Peakemit = () => {
     return () => clearInterval(interval);
   }, []);
 
-  return (
-    <div className="p-4 bg-gray-100 rounded-md shadow-md">
-      <h2 className="text-lg font-bold text-gray-800">Peak CO₂ Emission </h2>
+  return (<>
+    <div className="p-2 bg-gray-200 rounded-md  mb-4">
+    <span className="text-gray-500 text-lg flex justify-between">Peak Emission 
+    <div className="w-2 h-2  bg-red-500 text-white  flex items-center justify-center rounded-full">
+             
+             </div>
+    </span>
+    
       <p className="text-3xl font-semibold text-red-600">
         {peakValue !== null ? `${peakValue} PPM` : "Loading..."}
       </p>
     </div>
+
+    <div className="p-2 bg-gray-200 rounded-md ">
+    <span className="text-gray-500 text-lg flex justify-between">Lowest Emission 
+    <div className="w-2 h-2  bg-red-500 text-white  flex items-center justify-center rounded-full">
+             
+             </div>
+    </span>
+    <p className="text-3xl font-semibold text-red-600">
+    {peakValue !== null ? `${LowValue} PPM` : "Loading..."}
+    </p>
+    </div>
+    </>
   );
 };
 
