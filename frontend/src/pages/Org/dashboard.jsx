@@ -117,11 +117,11 @@ const Dashboard = () => {
           <div className="flex justify-between items-center mb-4">
             <span className="text-gray-500 text-lg">Live PPM Threshold</span>
           </div>
-          <p className={`text-2xl font-bold ${ppm > CO2_THRESHOLD_PPM ? "text-red-600" : "text-green-600"}`}>
+          <p className={`text-2xl bg-gray-100 p-3 mb-3 rounded-lg font-bold ${ppm > CO2_THRESHOLD_PPM ? "text-red-600" : "text-green-600"}`}>
             {ppm > CO2_THRESHOLD_PPM ? `Alert: ${ppm} PPM (Exceeded!)` : `${ppm} PPM (Safe)`}
           </p>
 
-          <p className={`text-2xl font-bold ${dailyCO2 > CO2_THRESHOLD_KG ? "text-red-600" : "text-green-600"}`}>
+          <p className={`text-2xl bg-gray-100 p-3 mb-3 rounded-lg font-bold ${dailyCO2 > CO2_THRESHOLD_KG ? "text-red-600" : "text-green-600"}`}>
             {dailyCO2.toFixed(2)} kg {dailyCO2 > CO2_THRESHOLD_KG ? "(Threshold Exceeded!)" : "(Safe)"}
           </p>
 
@@ -133,10 +133,10 @@ const Dashboard = () => {
         <div className="bg-white p-6 col-span-2 rounded-lg shadow-md">
           <h2 className="text-xl font-bold text-gray-800 mb-4 flex flex-row justify-between">CO₂ Monitoring</h2>
           
-          <p className="text-md border-b border-gray-200 p-2">Current PPM: {ppm ?? "Loading..."}</p>
-          <p className="text-md border-b border-gray-200 p-2">PPM Change Rate: {ppmRate.toFixed(2)} PPM/sec</p>
-          <p className="text-md border-b border-gray-200 p-2">CO₂ Mass (per sec): {co2Mass.toFixed(4)} kg</p>
-          <p className="text-md border-b border-gray-200 p-2">Total Daily CO₂: {dailyCO2.toFixed(2)} kg</p>
+          
+          <p className="text-md mb-2 rounded-lg p-3 bg-gray-100">PPM Change Rate: {ppmRate.toFixed(2)} PPM/sec</p>
+          <p className="text-md mb-2 rounded-lg p-3 bg-gray-100">CO₂ Mass (per sec): {co2Mass.toFixed(4)} kg</p>
+    
         </div>
       <div className="bg-white p-4 rounded-lg shadow-md flex flex-col col-span-2">
       <div className="text-gray-500 text-md mb-4 text">CO₂ Emission Speedometer</div>
