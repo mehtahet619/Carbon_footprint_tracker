@@ -1,0 +1,5 @@
+stages:
+  placeholder:
+    cmd: echo "Pipeline setup in progress"
+    outs:
+      - data/placeholder.txt

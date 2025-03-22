@@ -1,0 +1,1 @@
+print("Fetching training data from Supabase...")
