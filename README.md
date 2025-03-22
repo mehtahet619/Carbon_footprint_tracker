@@ -1,2 +1,7 @@
 # COMPETECODERS_47
 ODOO x GUJRAT VIDHYAPEETH HACKATHON
+
+Team : COMPETECODERS
+Team Number : 47
+Topic : Carbon Footprint tracker
+
