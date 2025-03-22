@@ -40,29 +40,13 @@ export default function DataDisplay() {
   }, []);
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">PPM Data</h1>
+   
 
-      {initialLoad ? (
-        <p className="text-gray-500">Loading...</p>
-      ) : errorMessage ? (
-        <p className="text-red-500">{errorMessage}</p>
-      ) : (
-        <>
-          <ul className="bg-white text-black shadow rounded p-4">
-            {data.slice(0, 5).map((rec) => (
-              <li key={rec.id} className="p-2 border-b">
-                CO₂ PPM: {rec.co2_ppm} (Timestamp: { Date(rec.timestamp)})
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-6 border p-2 rounded-lg">
-            <h2 className="text-xl font-bold mb-4">PPM Data Chart (Live Updates)</h2>
+       
+         
 
 
-<div className="flex flex-row gap-2">
-            <ResponsiveContainer width="100%" height={220}  className=" bg-white border-2 border-gray-300   p-1 rounded ">
+            <ResponsiveContainer width="100%" height={220}  className=" bg-white border-2 border-gray-300   rounded ">
               <BarChart data={data} barSize={30} className="">
                 <XAxis
                   dataKey="timestamp"
@@ -72,38 +56,12 @@ export default function DataDisplay() {
                 <YAxis />
                 <Tooltip />
                 <CartesianGrid strokeDasharray="3 3" />
-                <Bar dataKey="co2_ppm" fill="#8884d8" animationDuration={0} />
+                <Bar dataKey="co2_ppm" fill="#ff364a" animationDuration={0} />
               </BarChart>
             </ResponsiveContainer>
 
-            <ResponsiveContainer width="100%" height={220} className=" bg-white border-2 border-gray-300 p-1 rounded ">
-              <LineChart data={data}>
-                <XAxis
-                  dataKey="timestamp"
-                  tickFormatter={(tick) => new Date(tick).toLocaleTimeString()}
-                  tick={{ fontSize: 12 }}
-                />
-                <YAxis />
-                <Tooltip />
-                <CartesianGrid strokeDasharray="3 3" />
-                <Line
-                  type="monotone"
-                  dataKey="co2_ppm"
-                  stroke="#82ca9d"
-                  strokeWidth={2}
-                  dot={{ r: 4 }}
-                  activeDot={{ r: 6 }}
-                  animationDuration={0}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-
-            </div>
+         
 
 
-          </div>
-        </>
-      )}
-    </div>
   );
 }

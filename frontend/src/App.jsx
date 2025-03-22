@@ -1,29 +1,29 @@
-import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { supabase } from './components/supabaseClient'; // Ensure you import your Supabase client
-import Home from './pages/home';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { supabase } from "./components/supabaseClient"; // Ensure you import your Supabase client
 
-import GovIndex from './pages/Gov/index';
-import OrgIndex from './pages/Org/index';
+import Home from "./pages/home";
+import GovLogin from "./pages/Gov/login";
+import OrgLogin from "./pages/Org/login";
+import DataDisplay from "./components/DataDisplay";
 
-import DataDisplay from './components/DataDisplay';
+// Keep OrgIndex as the entry point for all Org pages
+import OrgIndex from "./pages/Org/index";
 
 function App() {
-
-
   return (
     <>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Gov/*" element={<GovIndex />} />
-          <Route path="/Org/*" element={<OrgIndex />} />
-          <Route path="/test" element={<DataDisplay />} />
-        </Routes>
-      </Router>
+    <Router>
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<Home />} />
+        <Route path="/Gov" element={<GovLogin />} />
+        <Route path="/Org" element={<OrgLogin />} />
+        <Route path="/test" element={<DataDisplay />} />
 
-      {/* Button to trigger OAuth login */}
-    
+        {/* Org Routes (Handled by OrgIndex with Sidebar) */}
+        <Route path="/org/*" element={<OrgIndex />} />
+      </Routes>
+    </Router>
     </>
   );
 }

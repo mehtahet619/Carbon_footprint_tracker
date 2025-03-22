@@ -1,34 +1,41 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { supabase } from '../../components/supabaseClient';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from "react-router-dom";
+import Sidebar from "../../components/Sidebar"; // Import Sidebar
+import Dashboard from "./dashboard";
+import Alerts from "./alerts";
+import Settings from "./settings";
+import Nav from '../../components/OrgMenu'
 
-import Home from '../Org/home'
-
-import GoogleOAUTH from '../../components/GoogleOAUTH'
-
-const OrgLogin = () => {
-  const navigate = useNavigate();
-
-
+const Org = () => {
   return (
-  <>
+<>
 
 
-  <GoogleOAUTH />
+    <Nav />
 
+    <div className="grid grid-cols-10 gap-3 w-full p-4 mx-auto mt-2 container ">
 
-      <Router>
+      
+      
+
+    <div className="px-2 col-span-2">
+      <Sidebar />
+    </div>
+      
+
+      
+      <div className="col-span-7 ">
         <Routes>
-          <Route path="/" element={<Home />} />
-          
+
+          <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/Alerts" element={<Alerts />} />
+          <Route path="/settings" element={<Settings />} />
+
         </Routes>
-      </Router>
-
-
+      </div>
+    </div>
 
     </>
   );
 };
 
-export default OrgLogin;
+export default Org;

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organization - Carbon Footprint Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <header class="bg-white shadow-md sticky top-0 z-50 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center text-green-700 text-2xl font-bold">
+                <i class="fas fa-leaf mr-2 text-3xl"></i>
+                <span>OrganizationEco</span>
+            </div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="#" class="text-gray-700 hover:bg-green-500 hover:text-white px-3 py-2 rounded-md font-medium">Dashboard</a></li>
+                    <li><a href="#" class="text-gray-700 hover:bg-green-500 hover:text-white px-3 py-2 rounded-md font-medium">Reports</a></li>
+                    <li><a href="#" class="text-gray-700 hover:bg-green-500 hover:text-white px-3 py-2 rounded-md font-medium">Analytics</a></li>
+                    <li><a href="#" class="text-gray-700 hover:bg-green-500 hover:text-white px-3 py-2 rounded-md font-medium">Settings</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container mx-auto p-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <!-- Sidebar -->
+            <aside class="bg-white p-6 rounded-lg shadow-md md:col-span-1">
+                <div class="flex items-center mb-6 border-b pb-4">
+                    <div class="w-12 h-12 bg-green-700 text-white flex items-center justify-center text-lg rounded-full">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-lg font-semibold">Sustainable Corp</h3>
+                        <p class="text-gray-500 text-sm">Admin Account</p>
+                    </div>
+                </div>
+                <ul class="space-y-4">
+                    <li><a href="#" class="flex items-center text-gray-700 hover:bg-green-500 hover:text-white p-3 rounded-lg"><i class="fas fa-tachometer-alt mr-3"></i> Dashboard</a></li>
+                    <li><a href="#" class="flex items-center text-gray-700 hover:bg-green-500 hover:text-white p-3 rounded-lg"><i class="fas fa-plug mr-3"></i> Energy Consumption</a></li>
+                    <li><a href="#" class="flex items-center text-gray-700 hover:bg-green-500 hover:text-white p-3 rounded-lg"><i class="fas fa-truck mr-3"></i> Transportation</a></li>
+                    <li><a href="#" class="flex items-center text-gray-700 hover:bg-green-500 hover:text-white p-3 rounded-lg"><i class="fas fa-trash mr-3"></i> Waste Management</a></li>
+                    <li><a href="#" class="flex items-center text-gray-700 hover:bg-green-500 hover:text-white p-3 rounded-lg"><i class="fas fa-chart-line mr-3"></i> Emissions Report</a></li>
+                    <li><a href="#" class="flex items-center text-gray-700 hover:bg-green-500 hover:text-white p-3 rounded-lg"><i class="fas fa-bullseye mr-3"></i> Reduction Goals</a></li>
+                    <li><a href="#" class="flex items-center text-gray-700 hover:bg-green-500 hover:text-white p-3 rounded-lg"><i class="fas fa-cog mr-3"></i> Settings</a></li>
+                </ul>
+            </aside>
+            
+            <!-- Main Content -->
+            <main class="md:col-span-3">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-gray-500 text-lg">Energy Emissions</span>
+                            <div class="w-10 h-10 bg-green-700 text-white flex items-center justify-center rounded-full">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                        </div>
+                        <p class="text-2xl font-bold">75.3 tCO₂e</p>
+                        <p class="text-sm text-red-500 flex items-center mt-1"><i class="fas fa-arrow-down mr-1"></i> 4.2% vs last month</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-gray-500 text-lg">Transport Emissions</span>
+                            <div class="w-10 h-10 bg-blue-500 text-white flex items-center justify-center rounded-full">
+                                <i class="fas fa-car"></i>
+                            </div>
+                        </div>
+                        <p class="text-2xl font-bold">42.8 tCO₂e</p>
+                        <p class="text-sm text-green-500 flex items-center mt-1"><i class="fas fa-arrow-up mr-1"></i> 2.7% vs last month</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
