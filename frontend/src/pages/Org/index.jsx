@@ -4,7 +4,6 @@ import Dashboard from "./dashboard";
 import Alerts from "./alerts";
 import Settings from "./settings";
 import Nav from '../../components/OrgMenu'
-import Threshold from '../Org/threashold'
 import Prediction from "./prediction";
 import AiRecomendation from './AiRecomendation'
 
@@ -32,7 +31,6 @@ const Org = () => {
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Alerts" element={<Alerts />} />
           <Route path="/Settings" element={<Settings />} />
-          <Route path="/threshold" element={<Threshold />} />
           <Route path="/Prediction" element={<Prediction />} />
           <Route path="/AiRecomendation" element={<AiRecomendation />} />
 

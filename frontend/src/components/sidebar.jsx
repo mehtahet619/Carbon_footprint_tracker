@@ -50,11 +50,7 @@ const Sidebar = () => {
               Prediction
             </Link>
           </li>
-          <li>
-            <Link to="/org/Threshold" className="flex items-center text-gray-700 hover:bg-gray-100 active:bg-gray-200 p-3 rounded-lg hover:translate-y-[-5px]  transition">
-              Threshold
-            </Link>
-          </li>
+
 
           <li>
             <Link to="/org/AiRecomendation" className="flex items-center text-gray-700 hover:bg-gray-100 active:bg-gray-200 p-3 rounded-lg hover:translate-y-[-5px]  transition">
