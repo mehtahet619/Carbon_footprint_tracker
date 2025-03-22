@@ -40,25 +40,25 @@ const Peakemit = () => {
   }, []);
 
   return (<>
-    <div className="p-2 bg-gray-200 rounded-md  mb-4">
+    <div className="p-2 bg-gray-100 rounded-md  mb-4">
     <span className="text-gray-500 text-lg flex justify-between">Peak Emission 
     <div className="w-2 h-2  bg-red-500 text-white  flex items-center justify-center rounded-full">
              
              </div>
     </span>
     
-      <p className="text-3xl font-semibold text-red-600">
+      <p className="text-2xl font-medium text-red-600">
         {peakValue !== null ? `${peakValue} PPM` : "Loading..."}
       </p>
     </div>
 
-    <div className="p-2 bg-gray-200 rounded-md ">
+    <div className="p-2 bg-gray-100 rounded-md ">
     <span className="text-gray-500 text-lg flex justify-between">Lowest Emission 
     <div className="w-2 h-2  bg-red-500 text-white  flex items-center justify-center rounded-full">
              
              </div>
     </span>
-    <p className="text-3xl font-semibold text-red-600">
+    <p className="text-2xl font-medium text-red-600">
     {peakValue !== null ? `${LowValue} PPM` : "Loading..."}
     </p>
     </div>

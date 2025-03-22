@@ -26,7 +26,7 @@ const Org = () => {
       
 
       
-      <div className="col-span-7 ">
+      <div className="col-span-8 pr-6 ">
         <Routes>
 
           <Route path="/Dashboard" element={<Dashboard />} />

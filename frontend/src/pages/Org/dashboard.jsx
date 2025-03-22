@@ -3,6 +3,7 @@ import LiveData from "../../components/DataDisplay";
 import Peakemit from "../../components/Peakemit";
 import { supabase } from "../../components/supabaseClient"; 
 import aiLogo from "../../components/ai_logo.jpg";
+import ReactSpeedometer from "react-d3-speedometer";
 
 
 const Dashboard = () => {
@@ -16,7 +17,7 @@ const Dashboard = () => {
 
 
 
-  const CO2_THRESHOLD_PPM = 5000;  // Live threshold for PPM
+  const CO2_THRESHOLD_PPM = 4000;  // Live threshold for PPM
   const CO2_THRESHOLD_KG = 100;    // Daily CO₂ emission limit (kg)
   const AIRFLOW_RATE = 0.1;        // Chimney airflow rate (cubic meters per second)
 
@@ -93,16 +94,16 @@ const Dashboard = () => {
 
   return (
     <div className="">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
     
         {/* Live CO₂ Emission Data */}
-        <div className="bg-white p-6 rounded-lg shadow-md flex flex-col col-span-3">
+        <div className="bg-white p-6 rounded-lg shadow-md flex flex-col col-span-4">
           <div className="text-left mb-2 text-gray-500 text-lg">CO₂ Live Emission Data</div>
           <LiveData />
         </div>
 
         {/* Peak Emission */}
-        <div className="bg-white p-6 rounded-lg shadow-md flex flex-col">
+        <div className="bg-white p-6 rounded-lg shadow-md flex flex-col col-span-2">
           <div className="flex justify-between items-center mb-4">
             <span className="text-gray-500 text-lg">Peak Emission Today</span>
           </div>
@@ -112,35 +113,46 @@ const Dashboard = () => {
         </div>
 
         {/* Live PPM Threshold Alert */}
-        <div className="bg-white p-6 rounded-lg shadow-md flex flex-col">
+        <div className="bg-white p-6 rounded-lg shadow-md flex flex-col col-span-2">
           <div className="flex justify-between items-center mb-4">
             <span className="text-gray-500 text-lg">Live PPM Threshold</span>
           </div>
           <p className={`text-2xl font-bold ${ppm > CO2_THRESHOLD_PPM ? "text-red-600" : "text-green-600"}`}>
             {ppm > CO2_THRESHOLD_PPM ? `Alert: ${ppm} PPM (Exceeded!)` : `${ppm} PPM (Safe)`}
           </p>
-        </div>
 
-        {/* Daily CO₂ Emission Tracker */}
-        <div className="bg-white p-6 rounded-lg shadow-md flex flex-col">
-          <div className="flex justify-between items-center mb-4">
-            <span className="text-gray-500 text-lg">Daily CO₂ Emission</span>
-          </div>
           <p className={`text-2xl font-bold ${dailyCO2 > CO2_THRESHOLD_KG ? "text-red-600" : "text-green-600"}`}>
             {dailyCO2.toFixed(2)} kg {dailyCO2 > CO2_THRESHOLD_KG ? "(Threshold Exceeded!)" : "(Safe)"}
           </p>
+
         </div>
+
+        
 
         {/* CO₂ Monitoring Stats */}
         <div className="bg-white p-6 col-span-2 rounded-lg shadow-md">
           <h2 className="text-xl font-bold text-gray-800 mb-4 flex flex-row justify-between">CO₂ Monitoring</h2>
           
-          <p className="text-lg">Current PPM: {ppm ?? "Loading..."}</p>
-          <p className="text-lg">PPM Change Rate: {ppmRate.toFixed(2)} PPM/sec</p>
-          <p className="text-lg">CO₂ Mass (per sec): {co2Mass.toFixed(4)} kg</p>
-          <p className="text-lg">Total Daily CO₂: {dailyCO2.toFixed(2)} kg</p>
+          <p className="text-sm">Current PPM: {ppm ?? "Loading..."}</p>
+          <p className="text-sm">PPM Change Rate: {ppmRate.toFixed(2)} PPM/sec</p>
+          <p className="text-sm">CO₂ Mass (per sec): {co2Mass.toFixed(4)} kg</p>
+          <p className="text-sm">Total Daily CO₂: {dailyCO2.toFixed(2)} kg</p>
         </div>
+      <div className="bg-white p-4 rounded-lg shadow-md flex flex-col col-span-2">
+      <div className="text-gray-500 text-md mb-4 text">CO₂ Emission Speedometer</div>
+      <ReactSpeedometer
+      maxValue={CO2_THRESHOLD_PPM}
+      value={ppm ?? 0}
+      needleColor="red"
+      startColor="green"
+      endColor="red"
+      segments={5}
+      currentValueText={`${ppm ?? 0} PPM`}
+
+      />
       </div>
+      </div>
+
 
 
 
