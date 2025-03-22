@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import aiLogo from "../components/ai_logo.jpg";
-import Alerts from "../pages/Org/alerts";
+
 
 // Function to get cookie value by name
 const getCookie = (name) => {
@@ -38,8 +37,8 @@ const Sidebar = () => {
           </li>
 
           <li>
-            <Link to="/org/Prediction" className="flex items-center text-gray-700 hover:bg-gray-100 active:bg-gray-200 p-3 rounded-lg hover:translate-y-[-5px]  transition">
-              Predictive Analytics
+            <Link to="/org/SetThreshold" className="flex items-center text-gray-700 hover:bg-gray-100 active:bg-gray-200 p-3 rounded-lg hover:translate-y-[-5px]  transition">
+              Set Thresholds
             </Link>
           </li>
 
@@ -53,7 +52,6 @@ const Sidebar = () => {
         </ul>
       </div>
 
-      <Alerts />
     </div>
   );
 };

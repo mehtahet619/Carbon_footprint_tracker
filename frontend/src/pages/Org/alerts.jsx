@@ -11,10 +11,10 @@ const Alerts = () => {
   const alertData = ppmData.filter((entry) => entry.co2_ppm > THRESHOLD);
 
   return (
-    <div className=" rounded-2xl bg-white p-2 shadow-lg">
-      <div className=" flex  flex-col  h-[300px] overflow-auto rounded-2xl bg-white text-gray-600  ring-1 ring-gray-200">
+    <div className=" rounded-2xl bg-white p-3 mt-[1px] shadow-md">
+      <div className=" flex  flex-col  h-[270px]  overflow-auto rounded-xl bg-white text-gray-600  ring-1 ring-gray-200">
         <div className="border-b p-6">
-          <h6 className="mb-2 font-semibold text-xl font-bold">System Alerts Received</h6>
+          <h6 className="mb-2 text-xl font-bold">System Alerts Received</h6>
           <p className="mb-4 text-sm font-light">
             <span className="font-semibold">{alertData.length}</span> Today
           </p>

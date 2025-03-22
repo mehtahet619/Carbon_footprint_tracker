@@ -6,6 +6,8 @@ import GovLogin from "./pages/Gov/login";
 import OrgLogin from "./pages/Org/login";
 import DataDisplay from "./components/DataDisplay";
 import { CO2Provider } from "./context/CO2Context"; 
+import GovIndex from './pages/Gov/index';
+
 
 // Keep OrgIndex as the entry point for all Org pages
 import OrgIndex from "./pages/Org/index";
@@ -23,6 +25,8 @@ function App() {
 
           {/* Org Routes (Handled by OrgIndex with Sidebar) */}
           <Route path="/org/*" element={<OrgIndex />} />
+
+          <Route path="/Gov/*" element={<GovIndex />} />
         </Routes>
       </Router>
     </CO2Provider>

@@ -71,7 +71,7 @@ const Dashboard = () => {
 
         {/* Peak Emission */}
         <div className="bg-white p-6 rounded-lg shadow-md flex flex-col col-span-2">
-          <div className="text-xl font-bold text-gray-800">Peak Emission Today</div>
+          <div className="text-xl font-bold mb-2 text-gray-800">Peak Emission Today</div>
           <p className="text-2xl font-bold"><Peakemit /></p>
         </div>
 
@@ -136,7 +136,7 @@ const Dashboard = () => {
             </button>
           </div>
           <iframe
-            src="https://b849a2c5fb47b78a22.gradio.live/"
+            src="https://53352414f220120298.gradio.live/"
             width="100%"
             height="500px"
             className="border-none"
