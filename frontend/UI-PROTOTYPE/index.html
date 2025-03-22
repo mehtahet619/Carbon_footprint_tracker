@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organization - Carbon Footprint Tracker</title>
+    <style>
+        :root {
+            --primary: #1d764a;
+            --primary-light: #4ca677;
+            --secondary: #2c3e50;
+            --light-bg: #f8f9fa;
+            --danger: #e74c3c;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --info: #3498db;
+            --gray: #6c757d;
+            --gray-light: #e2e3e5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--secondary);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            color: var(--primary);
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            background-color: var(--primary-light);
+            color: white;
+        }
+        
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .sidebar {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-right: 15px;
+        }
+        
+        .user-details h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .user-details p {
+            font-size: 14px;
+            color: var(--gray);
+        }
+        
+        .menu-items {
+            list-style: none;
+        }
+        
+        .menu-items li {
+            margin-bottom: 10px;
+        }
+        
+        .menu-items li a {
+            display: flex;
+            align-items: center;
+            color: var(--secondary);
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-items li a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .menu-items li a:hover, .menu-items li a.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+        
+        .metric-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .metric-card .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .metric-card .card-title {
+            font-size: 16px;
+            color: var(--gray);
+        }
+        
+        .metric-card .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+        }
+        
+        .metric-card .card-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .metric-card .card-trend {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+        
+        .trend-up {
+            color: var(--danger);
+        }
+        
+        .trend-down {
+            color: var(--success);
+        }
+        
+        .bg-energy {
+            background-color: var(--primary);
+        }
+        
+        .bg-transport {
+            background-color: var(--info);
+        }
+        
+        .bg-waste {
+            background-color: var(--warning);
+        }
+        
+        .bg-total {
+            background-color: var(--secondary);
+        }
+        
+        .chart-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .chart-filters {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chart-filters select {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid var(--gray-light);
+            background-color: white;
+            color: var(--secondary);
+        }
+        
+        .chart-area {
+            height: 300px;
+            position: relative;
+        }
+        
+        .emission-sources {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .data-table th, .data-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        .data-table th {
+            background-color: var(--light-bg);
+            font-weight: 600;
+        }
+        
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .badge-energy {
+            background-color: var(--primary);
+        }
+        
+        .badge-transport {
+            background-color: var(--info);
+        }
+        
+        .badge-waste {
+            background-color: var(--warning);
+        }
+        
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 500px;
+            max-width: 90%;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--gray-light);
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .overview {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .overview {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 5px 10px 5px 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                <span>OrganizationEco</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Dashboard</a></li>
+                    <li><a href="#">Reports</a></li>
+                    <li><a href="#">Analytics</a></li>
+                    <li><a href="#">Settings</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="dashboard">
+            <div class="sidebar">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <h3>Sustainable Corp</h3>
+                        <p>Admin Account</p>
+                    </div>
+                </div>
+                <ul class="menu-items">
+                    <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="#"><i class="fas fa-plug"></i> Energy Consumption</a></li>
+                    <li><a href="#"><i class="fas fa-truck"></i> Transportation</a></li>
+                    <li><a href="#"><i class="fas fa-trash"></i> Waste Management</a></li>
+                    <li><a href="#"><i class="fas fa-chart-line"></i> Emissions Report</a></li>
+                    <li><a href="#"><i class="fas fa-bullseye"></i> Reduction Goals</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </div>
+            
+            <div class="main-content">
+                <div class="overview">
+                    <div class="metric-card">
+                        <div class="card-header">
+                            <span class="card-title">Energy Emissions</span>
+                            <div class="card-icon bg-energy">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">75.3 tCO₂e</div>
+                        <div class="card-trend trend-down">
+                            <i class="fas fa-arrow-down"></i> 4.2% vs last month
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="card-header">
+                            <span class="card-title">Transport Emissions</span>
+                            <div class="card-icon bg-transport">
+                                <i class="fas fa-car"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">42.8 tCO₂e</div>
+                        <div class="card-trend trend-up">
+                            <i class="fas fa-arrow-up"></i> 2.7% vs last month
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="card-header">
+                            <span class="card-title">Waste Emissions</span>
+                            <div class="card-icon bg-waste">
+                                <i class="fas fa-recycle"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">18.5 tCO₂e</div>
+                        <div class="card-trend trend-down">
+                            <i class="fas fa-arrow-down"></i> 1.8% vs last month
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="card-header">
+                            <span class="card-title">Total Carbon Footprint</span>
+                            <div class="card-icon bg-total">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">136.6 tCO₂e</div>
+                        <div class="card-trend trend-down">
+                            <i class="fas fa-arrow-down"></i> 2.3% vs last month
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Carbon Emissions Trend</h3>
+                        <div class="chart-filters">
+                            <select id="chartTimeframe">
+                                <option value="monthly">Monthly</option>
+                                <option value="quarterly">Quarterly</option>
+                                <option value="yearly">Yearly</option>
+                            </select>
+                            <select id="chartCategory">
+                                <option value="all">All Categories</option>
+                                <option value="energy">Energy</option>
+                                <option value="transport">Transport</option>
+                                <option value="waste">Waste</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="chart-area" id="emissionsChart">
+                        <!-- Chart will be rendered here -->
+                    </div>
+                </div>
+                
+                <div class="emission-sources">
+                    <div class="chart-header">
+                        <h3>Emission Sources</h3>
+                        <button class="btn btn-primary" id="addEmissionBtn">
+                            <i class="fas fa-plus"></i> Add New
+                        </button>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Source</th>
+                                <th>Category</th>
+                                <th>Last Updated</th>
+                                <th>Monthly Avg (tCO₂e)</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="emissionSourcesTable">
+                            <!-- Table data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Emission Modal -->
+    <div class="modal" id="emissionModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="modalTitle">Add Emission Source</h2>
+            <form id="emissionForm">
+                <input type="hidden" id="emissionId">
+                <div class="form-group">
+                    <label for="sourceName">Source Name</label>
+                    <input type="text" id="sourceName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category" class="form-control" required>
+                        <option value="">Select a category</option>
+                        <option value="energy">Energy</option>
+                        <option value="transport">Transport</option>
+                        <option value="waste">Waste</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="emissionFactor">Emission Factor (kg CO₂e per unit)</label>
+                    <input type="number" id="emissionFactor" class="form-control" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="monthlyUsage">Monthly Usage</label>
+                    <input type="number" id="monthlyUsage" class="form-control" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="unit">Unit</label>
+                    <input type="text" id="unit" class="form-control" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script>
+        // Sample data
+        let emissionSources = [
+            {
+                id: 1,
+                name: "Office Electricity",
+                category: "energy",
+                emissionFactor: 0.5, // kg CO₂e per kWh
+                monthlyUsage: 45000, // kWh
+                unit: "kWh",
+                lastUpdated: "2025-03-15"
+            },
+            {
+                id: 2,
+                name: "Natural Gas Heating",
+                category: "energy",
+                emissionFactor: 0.2, // kg CO₂e per kWh
+                monthlyUsage: 65000, // kWh
+                unit: "kWh",
+                lastUpdated: "2025-03-15"
+            },
+            {
+                id: 3,
+                name: "Company Vehicles",
+                category: "transport",
+                emissionFactor: 0.14, // kg CO₂e per km
+                monthlyUsage: 125000, // km
+                unit: "km",
+                lastUpdated: "2025-03-12"
+            },
+            {
+                id: 4,
+                name: "Business Flights",
+                category: "transport",
+                emissionFactor: 0.25, // kg CO₂e per km
+                monthlyUsage: 85000, // km
+                unit: "km",
+                lastUpdated: "2025-03-10"
+            },
+            {
+                id: 5,
+                name: "Landfill Waste",
+                category: "waste",
+                emissionFactor: 0.58, // kg CO₂e per kg
+                monthlyUsage: 3200, // kg
+                unit: "kg",
+                lastUpdated: "2025-03-14"
+            }
+        ];
+        
+        // Monthly emissions data for the chart
+        const monthlyEmissionsData = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [
+                {
+                    label: 'Energy',
+                    data: [82.1, 85.7, 80.3, 78.9, 79.2, 77.8, 76.5, 77.1, 76.2, 75.8, 78.5, 75.3],
+                    backgroundColor: 'rgba(29, 118, 74, 0.1)',
+                    borderColor: '#1d764a',
+                    tension: 0.4,
+                    fill: true
+                },
+                {
+                    label: 'Transport',
+                    data: [38.5, 37.9, 39.2, 40.5, 41.2, 40.8, 41.5, 42.1, 43.2, 41.8, 41.7, 42.8],
+                    backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                    borderColor: '#3498db',
+                    tension: 0.4,
+                    fill: true
+                },
+                {
+                    label: 'Waste',
+                    data: [19.8, 20.1, 19.5, 19.2, 18.9, 19.1, 18.7, 18.5, 18.8, 19.2, 18.8, 18.5],
+                    backgroundColor: 'rgba(243, 156, 18, 0.1)',
+                    borderColor: '#f39c12',
+                    tension: 0.4,
+                    fill: true
+                }
+            ]
+        };
+        
+        // DOM elements
+        const emissionSourcesTable = document.getElementById('emissionSourcesTable');
+        const addEmissionBtn = document.getElementById('addEmissionBtn');
+        const emissionModal = document.getElementById('emissionModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const emissionForm = document.getElementById('emissionForm');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const closeModal = document.querySelector('.close-modal');
+        const emissionIdField = document.getElementById('emissionId');
+        
+        // Initialize the chart
+        let emissionsChart;
+        
+        function initializeChart() {
+            const ctx = document.createElement('canvas');
+            document.getElementById('emissionsChart').appendChild(ctx);
+            
+            emissionsChart = new Chart(ctx, {
+                type: 'line',
+                data: monthlyEmissionsData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.raw + ' tCO₂e';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Carbon Emissions (tCO₂e)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Populate emissions sources table
+        function populateEmissionSourcesTable() {
+            emissionSourcesTable.innerHTML = '';
+            
+            emissionSources.forEach(source => {
+                const row = document.createElement('tr');
+                
+                // Calculate monthly emissions in tonnes CO₂e
+                const monthlyEmissions = (source.emissionFactor * source.monthlyUsage / 1000).toFixed(1);
+                
+                let categoryClass = '';
+                switch(source.category) {
+                    case 'energy': categoryClass = 'badge-energy'; break;
+                    case 'transport': categoryClass = 'badge-transport'; break;
+                    case 'waste': categoryClass = 'badge-waste'; break;
+                }
+                
+                row.innerHTML = `
+                    <td>${source.name}</td>
+                    <td><span class="badge ${categoryClass}">${source.category}</span></td>
+                    <td>${source.lastUpdated}</td>
+                    <td>${monthlyEmissions}</td>
+                    <td class="actions">
+                        <button class="btn btn-primary edit-btn" data-id="${source.id}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-danger delete-btn" data-id="${source.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                
+                emissionSourcesTable.appendChild(row);
+            });
+            
+            // Add event listeners to the edit and delete buttons
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const sourceId = parseInt(this.getAttribute('data-id'));
+                    openEditModal(sourceId);
+                });
+            });
+            
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const sourceId = parseInt(this.getAttribute('data-id'));
+                    deleteEmissionSource(sourceId);
+                });
+            });
+        }
+        
+        // Open the modal for adding a new emission source
+        function openAddModal() {
+            modalTitle.textContent = 'Add Emission Source';
+            emissionIdField.value = '';
+            emissionForm.reset();
+            emissionModal.style.display = 'flex';
+        }
+        
+        // Open the modal for editing an existing emission source
+        function openEditModal(sourceId) {
+            const source = emissionSources.find(s => s.id === sourceId);
+            if (!source) return;
+            
+            modalTitle.textContent = 'Edit Emission Source';
+            emissionIdField.value = source.id;
+            document.getElementById('sourceName').value = source.name;
+            document.getElementById('category').value = source.category;
+            document.getElementById('emissionFactor').value = source.emissionFactor;
+            document.getElementById('monthlyUsage').value = source.monthlyUsage;
+            document.getElementById('unit').value = source.unit;
+            
+            emissionModal.style.display = 'flex';
+        }
+        
+        // Close the modal
+        function closeEmissionModal() {
+            emissionModal.style.display = 'none';
+        }
+        
+        // Delete an emission source
+        function deleteEmissionSource(sourceId) {
+            if (confirm('Are you sure you want to delete this emission source?')) {
+                emissionSources = emissionSources.filter(source => source.id !== sourceId);
+                populateEmissionSourcesTable();
+                updateTotals();
+            }
+        }
+        
+        // Save emission source data
+        function saveEmissionSource(event) {
+            event.preventDefault();
+            
+            const sourceId = emissionIdField.value ? parseInt(emissionIdField.value) : null;
+            const sourceName = document.getElementById('sourceName').value;
+            const category = document.getElementById('category').value;
+            const emissionFactor = parseFloat(document.getElementById('emissionFactor').value);
+            const monthlyUsage = parseFloat(document.getElementById('monthlyUsage').value);
+            const unit = document.getElementById('unit').value;
+            
+            const today = new Date();
+            const formattedDate = today.toISOString().split('T')[0];
+            
+            if (sourceId) {
+                // Update existing source
+                const index = emissionSources.findIndex(s => s.id === sourceId);
+                if (index !== -1) {
+                    emissionSources[index] = {
+                        ...emissionSources[index],
+                        name: sourceName,
+                        category: category,
+                        emissionFactor: emissionFactor,
+                        monthlyUsage: monthlyUsage,
+                        unit: unit,
+                        lastUpdated: formattedDate
+                    };
+                }
+            } else {
+                // Add new source
+                const newId = Math.max(...emissionSources.map(s => s.id), 0) + 1;
+                emissionSources.push({
+                    id: newId,
+                    name: sourceName,
+                    category: category,
+                    emissionFactor: emissionFactor,
+                    monthlyUsage: monthlyUsage,
+                    unit: unit,
+                    lastUpdated: formattedDate
+                });
+            }
+            
+            closeEmissionModal();
+            populateEmissionSourcesTable();
+            updateTotals();
+        }
+        
+        // Update the total emissions displayed in the cards
+        function updateTotals() {
+            const energyEmissions = emissionSources
+                .filter(source => source.category === 'energy')
+                .reduce((sum, source) => sum + (source.emissionFactor * source.monthlyUsage / 1000), 0);
+                
+            const transportEmissions = emissionSources
+                .filter(source => source.category === 'transport')
+                .reduce((sum, source) => sum + (source.emissionFactor * source.monthlyUsage / 1000), 0);
+                
+            const wasteEmissions = emissionSources
+                .filter(source => source.category ===

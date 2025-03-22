@@ -1,9 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { supabase } from '../../components/supabaseClient';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-const index = () => {
+import Home from '../Org/home'
+
+import GoogleOAUTH from '../../components/GoogleOAUTH'
+
+const OrgLogin = () => {
+  const navigate = useNavigate();
+
+
   return (
-    <div>Org</div>
-  )
-}
+  <>
 
-export default index
+
+  <GoogleOAUTH />
+
+
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          
+        </Routes>
+      </Router>
+
+
+
+    </>
+  );
+};
+
+export default OrgLogin;
