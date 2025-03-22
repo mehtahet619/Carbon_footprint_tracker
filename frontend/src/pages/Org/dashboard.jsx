@@ -133,15 +133,15 @@ const Dashboard = () => {
         <div className="bg-white p-6 col-span-2 rounded-lg shadow-md">
           <h2 className="text-xl font-bold text-gray-800 mb-4 flex flex-row justify-between">CO₂ Monitoring</h2>
           
-          <p className="text-sm">Current PPM: {ppm ?? "Loading..."}</p>
-          <p className="text-sm">PPM Change Rate: {ppmRate.toFixed(2)} PPM/sec</p>
-          <p className="text-sm">CO₂ Mass (per sec): {co2Mass.toFixed(4)} kg</p>
-          <p className="text-sm">Total Daily CO₂: {dailyCO2.toFixed(2)} kg</p>
+          <p className="text-md border-b border-gray-200 p-2">Current PPM: {ppm ?? "Loading..."}</p>
+          <p className="text-md border-b border-gray-200 p-2">PPM Change Rate: {ppmRate.toFixed(2)} PPM/sec</p>
+          <p className="text-md border-b border-gray-200 p-2">CO₂ Mass (per sec): {co2Mass.toFixed(4)} kg</p>
+          <p className="text-md border-b border-gray-200 p-2">Total Daily CO₂: {dailyCO2.toFixed(2)} kg</p>
         </div>
       <div className="bg-white p-4 rounded-lg shadow-md flex flex-col col-span-2">
       <div className="text-gray-500 text-md mb-4 text">CO₂ Emission Speedometer</div>
       <ReactSpeedometer
-      maxValue={CO2_THRESHOLD_PPM}
+      maxValue={10000}
       value={ppm ?? 0}
       needleColor="red"
       startColor="green"
