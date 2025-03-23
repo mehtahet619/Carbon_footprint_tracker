@@ -1,1 +1,0 @@
-print("Fetching prediction data from Supabase...")

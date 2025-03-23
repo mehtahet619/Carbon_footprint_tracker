@@ -1,5 +1,0 @@
-supabase
-pandas
-scikit-learn
-joblib
-dvcp
