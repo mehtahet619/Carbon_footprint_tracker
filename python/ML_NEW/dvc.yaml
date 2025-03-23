@@ -1,0 +1,24 @@
+stages:
+  fetch_training:
+    cmd: python src/fetch_training_data.py
+    outs:
+      - data/new_training_data.csv
+  preprocess_training:
+    cmd: python src/preprocess_training.py
+    deps:
+      - data/new_training_data.csv
+    outs:
+      - data/processed_training_data.csv
+  train_model:
+    cmd: python src/train_model.py
+    deps:
+      - data/processed_training_data.csv
+    outs:
+      - models/arma_stl_model.joblib
+  predict_co2:
+    cmd: python src/predict_co2.py
+    deps:
+      - data/processed_training_data.csv
+      - models/arma_stl_model.joblib
+    outs:
+      - data/predicted_co2.csv

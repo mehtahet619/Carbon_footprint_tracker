@@ -1,0 +1,56 @@
+schema: '2.0'
+stages:
+  fetch_training:
+    cmd: python src/fetch_training_data.py
+    outs:
+    - path: data/new_training_data.csv
+      hash: md5
+      md5: 663175fad2a3f506b5a8db0b13c655c3
+      size: 4939
+  preprocess_training:
+    cmd: python src/preprocess_training.py
+    deps:
+    - path: data/new_training_data.csv
+      hash: md5
+      md5: 663175fad2a3f506b5a8db0b13c655c3
+      size: 4939
+    outs:
+    - path: data/processed_training_data.csv
+      hash: md5
+      md5: 2b12e9038baa2274a63eb9cefd7cd250
+      size: 4952
+  fetch_prediction:
+    cmd: python src/fetch_prediction_data.py
+    outs:
+    - path: data/new_prediction_data.csv
+      hash: md5
+      md5: 16847153742991b463fa833595d54c91
+      size: 11
+  predict_co2:
+    cmd: python src/predict_co2.py
+    deps:
+    - path: data/processed_training_data.csv
+      hash: md5
+      md5: 2b12e9038baa2274a63eb9cefd7cd250
+      size: 4952
+    - path: models/arma_stl_model.joblib
+      hash: md5
+      md5: 99338aeb658c716b3cd1fef9db3352ea
+      size: 233175
+    outs:
+    - path: data/predicted_co2.csv
+      hash: md5
+      md5: 1b46a6b6f32d41eec09cf01d10aeb84c
+      size: 6192
+  train_model:
+    cmd: python src/train_model.py
+    deps:
+    - path: data/processed_training_data.csv
+      hash: md5
+      md5: 2b12e9038baa2274a63eb9cefd7cd250
+      size: 4952
+    outs:
+    - path: models/arma_stl_model.joblib
+      hash: md5
+      md5: 99338aeb658c716b3cd1fef9db3352ea
+      size: 233175
