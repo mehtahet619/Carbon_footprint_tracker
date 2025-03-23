@@ -10,6 +10,13 @@ export const CO2Provider = ({ children }) => {
   const [predictedData, setPredictedData] = useState([]); // Stores predicted values
 
   useEffect(() => {
+
+
+
+
+
+
+
     const fetchPPM = async () => {
       try {
         let { data, error } = await supabase
