@@ -10,7 +10,7 @@ const getCookie = (name) => {
 
 const Sidebar = () => {
   const userImage = getCookie("user_image");
-  const userName = getCookie("user_name") || "Org Name";
+  const userName = getCookie("user_name") || "GPCB (GOV)";
 
   console.log(userImage);
 

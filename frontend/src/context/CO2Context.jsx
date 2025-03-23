@@ -42,8 +42,10 @@ export const CO2Provider = ({ children }) => {
             latestLimits[record.industry] = record;
           }
         });
+        
 
         setGovLimits(Object.values(latestLimits)); // Convert object back to an array
+        console.log(data);
       } catch (error) {
         console.error("Gov Limits Fetch Error:", error);
       }
@@ -55,7 +57,7 @@ export const CO2Provider = ({ children }) => {
     const interval = setInterval(() => {
       fetchPPM();
       fetchGovLimits();
-    }, 2000); // Fetch every 2 sec
+    }, 10000); // Fetch every 10 sec
 
     return () => clearInterval(interval);
   }, []);
