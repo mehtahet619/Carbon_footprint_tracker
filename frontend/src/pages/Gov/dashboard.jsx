@@ -1,6 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CO2Context } from "../../context/CO2Context";
 
+
+
+
 const Dashboard = () => {
   const { emissionsData } = useContext(CO2Context); // Fetch CO2 data from context
 
@@ -9,10 +12,12 @@ const Dashboard = () => {
     liveEmissionRate: 0,
     totalEmittedToday: 0,
     topIndustry: "",
-    complianceRate: 0,
+
     exceedingOrgs: 0,
-    renewableUsage: 0,
+
   });
+
+  
 
   // Effect to update metrics when context data changes
   useEffect(() => {
@@ -21,9 +26,9 @@ const Dashboard = () => {
         liveEmissionRate: emissionsData.liveEmissionRate || 0,
         totalEmittedToday: emissionsData.totalEmittedToday || 0,
         topIndustry: emissionsData.topIndustry || "N/A",
-        complianceRate: emissionsData.complianceRate || 0,
+       
         exceedingOrgs: emissionsData.exceedingOrgs || 0,
-        renewableUsage: emissionsData.renewableUsage || 0,
+        
       });
     }
   }, [emissionsData]);
@@ -63,17 +68,7 @@ const Dashboard = () => {
           <p className="text-gray-600">Oil & Gass</p>
         </div>
 
-        {/* Compliance Rate */}
-        <div className="bg-white p-6 rounded-lg shadow-md flex flex-col">
-          <div className="text-left mb-2 text-xl font-bold text-gray-800 flex justify-between">
-            Compliance Rate
-            <div className="text-green-500 text-2xl font-bold">
-              {metrics.complianceRate}%
-            </div>
-          </div>
-          <p className="text-gray-600">Percentage of organizations following emission norms.</p>
-        </div>
-
+       
         {/* Organizations Exceeding Limits */}
         <div className="bg-white p-6 rounded-lg shadow-md flex flex-col">
           <div className="text-left mb-2 text-xl font-bold text-gray-800 flex justify-between">
@@ -85,16 +80,9 @@ const Dashboard = () => {
           <p className="text-gray-600">Companies breaching CO₂ limits today.</p>
         </div>
 
-        {/* Renewable Energy Usage */}
-        <div className="bg-white p-6 rounded-lg shadow-md flex flex-col">
-          <div className="text-left mb-2 text-xl font-bold text-gray-800 flex justify-between">
-            Renewable Energy Usage
-            <div className="text-green-600 text-2xl font-bold">
-              {metrics.renewableUsage}%
-            </div>
-          </div>
-          <p className="text-gray-600">Percentage of energy from renewable sources.</p>
-        </div>
+
+        
+
 
       </div>
     </div>

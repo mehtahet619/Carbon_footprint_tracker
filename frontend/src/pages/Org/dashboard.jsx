@@ -4,6 +4,7 @@ import Peakemit from "../../components/Peakemit";
 import aiLogo from "../../components/ai_logo.jpg";
 import ReactSpeedometer from "react-d3-speedometer";
 import { CO2Context } from "../../context/CO2Context";
+import PredictedData from "../../components/DataPredicted"
 
 const Dashboard = () => {
 
@@ -11,7 +12,7 @@ const Dashboard = () => {
 
 
 
-  const { ppmData } = useContext(CO2Context); // ✅ Get ppmData from context
+  const { ppmData , govLimits } = useContext(CO2Context); // ✅ Get ppmData from context
 
   const [previousPPM, setPreviousPPM] = useState(null);
   const [ppmRate, setPPMRate] = useState(0);
@@ -115,6 +116,9 @@ const Dashboard = () => {
         </div>
       </div>
 
+
+      <PredictedData />
+
       {/* Chatbot Toggle Button */}
       <button
         onClick={() => setIsOpen(true)}
@@ -136,7 +140,7 @@ const Dashboard = () => {
             </button>
           </div>
           <iframe
-            src="https://53352414f220120298.gradio.live/"
+            src="https://9892573bb23bd170bb.gradio.live/"
             width="100%"
             height="500px"
             className="border-none"

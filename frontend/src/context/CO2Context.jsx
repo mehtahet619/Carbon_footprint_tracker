@@ -5,65 +5,80 @@ import { supabase } from "../components/supabaseClient";
 export const CO2Context = createContext();
 
 export const CO2Provider = ({ children }) => {
-  const [ppmData, setPpmData] = useState([]); // Stores last 60 records
-  const [govLimits, setGovLimits] = useState([]); // Stores latest limit per industry
+  const [ppmData, setPpmData] = useState([]); // Last 60 records
+  const [govLimits, setGovLimits] = useState([]); // Latest limit per industry
+  const [predictedData, setPredictedData] = useState([]); // Stores predicted values
 
   useEffect(() => {
-    async function fetchPPM() {
+    const fetchPPM = async () => {
       try {
-        // Fetch last 60 records from ppm_data
-        let { data: ppmRecords, error: ppmError } = await supabase
+        let { data, error } = await supabase
           .from("ppm_data")
           .select("co2_ppm, timestamp")
           .order("timestamp", { ascending: false })
           .limit(60);
 
-        if (ppmError) throw ppmError;
-        if (ppmRecords.length > 0) setPpmData(ppmRecords);
+        if (error) throw error;
+        if (data?.length > 0) setPpmData(data);
       } catch (error) {
         console.error("PPM Data Fetch Error:", error);
       }
-    }
+    };
 
-    async function fetchGovLimits() {
+    const fetchGovLimits = async () => {
       try {
-        // Fetch latest ppm_limit, kg_limit for each unique industry
-        let { data: limitRecords, error: limitError } = await supabase
+        let { data, error } = await supabase
           .from("gov_set_limit")
           .select("ppm_limit, kg_limit, industry, timestamp")
           .order("timestamp", { ascending: false });
 
-        if (limitError) throw limitError;
+        if (error) throw error;
 
-        // Extract only the latest record per unique industry
+        // Get the latest record per industry
         const latestLimits = {};
-        limitRecords.forEach((record) => {
+        data.forEach((record) => {
           if (!latestLimits[record.industry]) {
             latestLimits[record.industry] = record;
           }
         });
-        
 
-        setGovLimits(Object.values(latestLimits)); // Convert object back to an array
-        console.log(data);
+        setGovLimits(Object.values(latestLimits)); 
       } catch (error) {
         console.error("Gov Limits Fetch Error:", error);
       }
-    }
+    };
 
+    const fetchPredictedData = async () => {
+      try {
+        let { data, error } = await supabase
+          .from("predicted_data")
+          .select("co2_ppm, timestamp")
+          .order("timestamp", { ascending: false });
+
+        if (error) throw error;
+        if (data?.length > 0) setPredictedData(data);
+      } catch (error) {
+        console.error("Predicted Data Fetch Error:", error);
+      }
+    };
+
+    // Initial Fetch
     fetchPPM();
     fetchGovLimits();
+    fetchPredictedData();
 
+    // Auto-refresh every 10 seconds
     const interval = setInterval(() => {
       fetchPPM();
       fetchGovLimits();
-    }, 10000); // Fetch every 10 sec
+      fetchPredictedData();
+    }, 10000);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <CO2Context.Provider value={{ ppmData, govLimits }}>
+    <CO2Context.Provider value={{ ppmData, govLimits, predictedData }}>
       {children}
     </CO2Context.Provider>
   );
