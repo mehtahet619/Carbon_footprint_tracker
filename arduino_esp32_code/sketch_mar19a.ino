@@ -34,7 +34,6 @@ float getPPM(float sensorValue, float a, float b) {
     float ratio = sensorResistance / RZERO; 
     return a * pow(ratio, b); 
 }
-
 void sendToSupabase(float co2_ppm, float co_ppm, float no2_ppm) {
     if (WiFi.status() == WL_CONNECTED) {
         HTTPClient http;
@@ -51,7 +50,7 @@ void sendToSupabase(float co2_ppm, float co_ppm, float no2_ppm) {
         String jsonData;
         serializeJson(jsonDoc, jsonData);
 
-        Serial.println("\n--- Sending Data to Supabase ---");
+        Serial.println("\n--- Sending Data to ppm_data Table ---");
         Serial.println(jsonData);
 
         int httpResponseCode = http.POST(jsonData);
@@ -67,10 +66,43 @@ void sendToSupabase(float co2_ppm, float co_ppm, float no2_ppm) {
         }
 
         http.end();
+
+        // Send data to training_data table
+        HTTPClient httpTraining;
+        const char* trainingDataUrl = "https://xrhopfxrspyfbbobrdzr.supabase.co/rest/v1/training_data";
+        httpTraining.begin(trainingDataUrl);
+        httpTraining.addHeader("Content-Type", "application/json");
+        httpTraining.addHeader("apikey", apiKey);
+        httpTraining.addHeader("Authorization", String("Bearer ") + Authorization_key);
+
+        StaticJsonDocument<100> trainingJson;
+        trainingJson["co2_ppm"] = co2_ppm;
+        trainingJson["processed"] = false;
+
+        String trainingJsonData;
+        serializeJson(trainingJson, trainingJsonData);
+
+        Serial.println("\n--- Sending Data to training_data Table ---");
+        Serial.println(trainingJsonData);
+
+        int trainingHttpResponseCode = httpTraining.POST(trainingJsonData);
+        Serial.print("Training Data Response Code: ");
+        Serial.println(trainingHttpResponseCode);
+
+        if (trainingHttpResponseCode > 0) {
+            String trainingResponse = httpTraining.getString();
+            Serial.println("Training Response Received:");
+            Serial.println(trainingResponse);
+        } else {
+            Serial.println("Error in HTTP request!");
+        }
+
+        httpTraining.end();
     } else {
         Serial.println("WiFi Disconnected!");
     }
 }
+
 
 void setup() {
     Serial.begin(115200);

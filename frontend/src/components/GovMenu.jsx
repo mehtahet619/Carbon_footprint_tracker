@@ -6,7 +6,7 @@ const OrgMenu = () => {
     <div class="container mx-auto flex justify-between items-center">
         <div class="flex items-center text-gray-700 text-2xl font-bold">
             <i class="fas fa-leaf mr-2 text-3xl"></i>
-            <span>Organization Portal</span>
+            <span>Government Portal</span>
         </div>
         <nav>
             <ul class="flex space-x-6">
