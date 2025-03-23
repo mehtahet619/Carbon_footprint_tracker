@@ -2,4 +2,4 @@ supabase
 pandas
 scikit-learn
 joblib
-dvc
+dvcp
