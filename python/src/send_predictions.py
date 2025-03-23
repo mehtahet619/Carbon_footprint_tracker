@@ -1,0 +1,1 @@
+print("Sending predictions to Supabase...")
