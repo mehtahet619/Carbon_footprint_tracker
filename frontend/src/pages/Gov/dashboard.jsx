@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-
+import { CO2Context } from "../../context/CO2Context";
 
 const Dashboard = () => {
 

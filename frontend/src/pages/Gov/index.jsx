@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Sidebar from "../../components/SidebarAdmin"; // Import Sidebar
 import Dashboard from "./dashboard";
 import Nav from "../../components/GovMenu"
-import SetThreashold from "./SetThreashold"
+import SetThreashold from "./SetThreshold"
 import Settings from "./setting"
 
 
@@ -30,7 +30,7 @@ const Org = () => {
 
           <Route path="/Dashboard" element={<Dashboard />} />
 
-          <Route path="/SetThreashold" element={<SetThreashold />} />
+          <Route path="/SetThreshold" element={<SetThreashold />} />
 
           <Route path="/Settings" element={<Settings />} />
 

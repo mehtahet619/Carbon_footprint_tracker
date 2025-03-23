@@ -31,19 +31,19 @@ const Sidebar = () => {
         {/* Navigation Links */}
         <ul className="space-y-1">
           <li>
-            <Link to="/org/Dashboard" className="flex items-center text-gray-700 hover:bg-gray-100 active:bg-gray-200 p-3 rounded-lg hover:translate-y-[-5px]  transition">
+            <Link to="/Gov/Dashboard" className="flex items-center text-gray-700 hover:bg-gray-100 active:bg-gray-200 p-3 rounded-lg hover:translate-y-[-5px]  transition">
               Dashboard
             </Link>
           </li>
 
           <li>
-            <Link to="/org/SetThreshold" className="flex items-center text-gray-700 hover:bg-gray-100 active:bg-gray-200 p-3 rounded-lg hover:translate-y-[-5px]  transition">
+            <Link to="/Gov/SetThreshold" className="flex items-center text-gray-700 hover:bg-gray-100 active:bg-gray-200 p-3 rounded-lg hover:translate-y-[-5px]  transition">
               Set Thresholds
             </Link>
           </li>
 
           <li>
-            <Link to="/org/settings" className="flex items-center text-gray-700 hover:bg-gray-100 active:bg-gray-200 p-3 rounded-lg hover:translate-y-[-5px]  transition">
+            <Link to="/Gov/settings" className="flex items-center text-gray-700 hover:bg-gray-100 active:bg-gray-200 p-3 rounded-lg hover:translate-y-[-5px]  transition">
               Setting
             </Link>
           </li>
