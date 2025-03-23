@@ -1,0 +1,9 @@
+schema: '2.0'
+stages:
+  fetch_training:
+    cmd: python src/fetch_training_data.py
+    outs:
+    - path: data/new_training_data.csv
+      hash: md5
+      md5: 75326795d10c3ea1fa7e684bd8498b33
+      size: 19
