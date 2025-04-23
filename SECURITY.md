@@ -17,7 +17,7 @@ If you discover a security vulnerability in this project, we encourage you to re
 
 ###  Where to Report
 
-Please report vulnerabilities by emailing us at **security@carbontracker.dev** or by opening a **[GitHub Security Advisory](https://github.com/mehtahet619/Carbon_footprint_tracker/security/advisories)** (private).
+Please report vulnerabilities by emailing us at **mehtahet619@gmail.com** or by opening a **[GitHub Security Advisory](https://github.com/mehtahet619/Carbon_footprint_tracker/security/advisories)** (private).
 
 ###  Response Time
 
