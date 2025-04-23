@@ -2,20 +2,43 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+The following table lists which versions of the Carbon Footprint Tracker are currently receiving security updates:
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| 5.1.x   |  Yes              |
+| 5.0.x   |  No               |
+| 4.0.x   |  Yes              |
+| < 4.0   |  No               |
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+If you discover a security vulnerability in this project, we encourage you to report it responsibly.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+###  Where to Report
+
+Please report vulnerabilities by emailing us at **security@carbontracker.dev** or by opening a **[GitHub Security Advisory](https://github.com/mehtahet619/Carbon_footprint_tracker/security/advisories)** (private).
+
+###  Response Time
+
+We aim to acknowledge reports within **2 business days** and provide a resolution within **7–14 business days**, depending on the severity.
+
+###  What to Include
+
+When reporting a vulnerability, please include:
+- A clear and concise description of the vulnerability.
+- Steps to reproduce the issue.
+- Any relevant logs, screenshots, or proof-of-concept code.
+- Suggestions for mitigation (if any).
+
+###  What Happens Next
+
+Once your report is received:
+- We will confirm receipt and begin an investigation.
+- You’ll receive updates as we verify and address the issue.
+- If accepted, the fix will be released in a security patch and credit will be given (with your permission).
+- If declined, we will provide reasoning.
+
+---
+
+Thank you for helping us make the Carbon Footprint Tracker more secure! 
